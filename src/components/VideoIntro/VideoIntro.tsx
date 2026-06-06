@@ -21,6 +21,14 @@ export default function VideoIntro() {
   const [soundHintVisible, setSoundHintVisible] = useState(true);
   const userPausedRef = useRef(false);
 
+  const safePlay = (v: HTMLVideoElement | null) => {
+    if (!v) return;
+    v.play().catch(() => {
+      // Browser blocked autoplay or source not ready yet — silently ignore.
+      // The video will play once the user interacts or the source loads.
+    });
+  };
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -53,8 +61,8 @@ export default function VideoIntro() {
 
         if (entry.isIntersecting) {
           if (!userPausedRef.current) {
-            fg.play();
-            bg.play();
+            safePlay(fg);
+            safePlay(bg);
             setPlaying(true);
           }
         } else {
@@ -83,8 +91,8 @@ export default function VideoIntro() {
     if (!v) return;
     if (v.paused) {
       userPausedRef.current = false;
-      v.play();
-      bgVideoRef.current?.play();
+      safePlay(v);
+      safePlay(bgVideoRef.current);
       setPlaying(true);
     } else {
       userPausedRef.current = true;
