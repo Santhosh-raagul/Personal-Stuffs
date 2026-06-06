@@ -1,0 +1,218 @@
+.section {
+  background: #080808;
+  padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 8vw, 8rem);
+  position: relative;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(255, 140, 40, 0.2), transparent);
+}
+
+.inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.headerArea {
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.label {
+  display: block;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 140, 40, 0.8);
+  margin-bottom: 0.8rem;
+}
+
+.heading {
+  font-family: var(--font-heading, Georgia, serif);
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+/* Timeline */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.card {
+  display: grid;
+  grid-template-columns: 160px 32px 1fr;
+  gap: 0 1.5rem;
+  padding-bottom: 3.5rem;
+}
+
+.card:last-child .line {
+  display: none;
+}
+
+/* Left column */
+.cardLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.15rem;
+}
+
+.period {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.35);
+  text-align: right;
+  line-height: 1.5;
+}
+
+.typeBadge {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 140, 40, 0.7);
+  border: 1px solid rgba(255, 140, 40, 0.25);
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+}
+
+/* Divider column */
+.cardDivider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255, 140, 40, 0.85);
+  border: 2px solid rgba(255, 140, 40, 0.3);
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+  box-shadow: 0 0 12px rgba(255, 140, 40, 0.4);
+}
+
+.line {
+  width: 1px;
+  flex: 1;
+  background: linear-gradient(to bottom, rgba(255, 140, 40, 0.3), rgba(255, 140, 40, 0.05));
+  margin-top: 6px;
+}
+
+/* Right column */
+.cardRight {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.role {
+  font-family: var(--font-heading, Georgia, serif);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.company {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 140, 40, 0.75);
+}
+
+.project {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.38);
+  font-style: italic;
+}
+
+.highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.highlights li {
+  font-size: clamp(0.82rem, 1.3vw, 0.92rem);
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.5);
+  padding-left: 1.1rem;
+  position: relative;
+  font-weight: 300;
+}
+
+.highlights li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: rgba(255, 140, 40, 0.5);
+  font-size: 0.75rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  padding: 0.2rem 0.55rem;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .card {
+    grid-template-columns: 28px 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .cardLeft {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .period {
+    text-align: left;
+  }
+
+  .cardDivider {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .cardRight {
+    grid-row: 2;
+    grid-column: 2;
+  }
+}

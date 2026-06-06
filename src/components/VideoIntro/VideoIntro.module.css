@@ -1,0 +1,380 @@
+/* ── Hero wrapper ── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: #080808;
+  isolation: isolate;
+}
+
+/* ── Ambient blurred background — fills the whole hero ── */
+.bgVideo {
+  position: absolute;
+  inset: -10%;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  object-position: center center;
+  filter: blur(40px) brightness(0.28) saturate(1.5);
+  transform: scale(1.05);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/*
+ * Portrait video (720×1280 = 9:16).
+ * Anchor to the RIGHT — character on right, text on left.
+ */
+.fgVideo {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: auto;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+}
+
+/* ── Cinematic gradient overlays ── */
+.overlays {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* Heavy left fade — keeps text readable */
+.overlayLeft {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.92) 0%,
+    rgba(0, 0, 0, 0.70) 30%,
+    rgba(0, 0, 0, 0.25) 55%,
+    transparent 75%
+  );
+}
+
+/* Gentle top vignette */
+.overlayTop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.65) 0%,
+    transparent 40%
+  );
+}
+
+/* Cinematic bottom fade */
+.overlayBottom {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.30) 28%,
+    transparent 52%
+  );
+}
+
+/* Subtle right edge fade — blends video into bg */
+.overlayRight {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to left,
+    rgba(0, 0, 0, 0.45) 0%,
+    transparent 35%
+  );
+}
+
+/* Circular vignette */
+.overlayVignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 120% 110% at 50% 50%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+}
+
+/* ── Portfolio content — left side ── */
+.content {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  padding: clamp(5rem, 7vw, 7rem) clamp(2rem, 8vw, 8rem) clamp(2rem, 4vw, 4rem);
+  max-width: 55%;
+  pointer-events: none;
+  gap: 0.5rem;
+}
+
+.tagline {
+  font-family: var(--font-mono, 'Courier New', monospace);
+  font-size: clamp(0.58rem, 1.1vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255, 165, 60, 0.9);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.firstName,
+.lastName {
+  display: block;
+  font-family: var(--font-heading, 'Georgia', serif);
+  font-size: clamp(3.8rem, 9.5vw, 9rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  text-shadow:
+    0 0 100px rgba(255, 140, 40, 0.18),
+    0 4px 50px rgba(0, 0, 0, 0.95);
+  line-height: 0.9;
+}
+
+.lastName {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.role {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: clamp(0.72rem, 1.25vw, 0.95rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.50);
+  max-width: 38ch;
+  line-height: 1.75;
+  margin-top: 1rem;
+}
+
+/* ── Controls ── */
+.controls {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 6;
+  display: flex;
+  gap: 0.7rem;
+}
+
+.controlBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+
+.controlBtn:hover {
+  background: rgba(255, 150, 50, 0.2);
+  border-color: rgba(255, 150, 50, 0.5);
+  transform: scale(1.07);
+}
+
+.controlBtn:active {
+  transform: scale(0.95);
+}
+
+/* ── Sound hint ── */
+.soundHint {
+  position: absolute;
+  bottom: 3.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.7s ease;
+  white-space: nowrap;
+}
+
+.soundHintVisible {
+  opacity: 1;
+}
+
+.soundPulse {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: rgba(255, 140, 40, 0.9);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1;   transform: scale(1);    }
+  50%       { opacity: 0.4; transform: scale(0.65); }
+}
+
+/* ── Scroll indicator ── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.scrollLine {
+  display: block;
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 150, 50, 0.85), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.25; transform: scaleY(0.55); }
+  50%       { opacity: 1;    transform: scaleY(1);    }
+}
+
+.scrollLabel {
+  font-family: var(--font-mono, 'Courier New', monospace);
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.32);
+  transition: color 0.2s;
+}
+
+.scrollIndicator:hover .scrollLine {
+  background: linear-gradient(to bottom, transparent, rgba(255, 150, 50, 1), transparent);
+}
+.scrollIndicator:hover .scrollLabel {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Mobile ── */
+/*
+ * Portrait phones: full-bleed portrait video fills the screen like a movie
+ * poster. A top-down dark gradient keeps text readable. Character shows
+ * through in the lower half.
+ */
+@media (max-width: 768px) {
+  /* Full-width portrait video anchored to the bottom — fills viewport height */
+  .fgVideo {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Override the horizontal left-fade with a vertical top-down dark overlay */
+  .overlayLeft {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.97) 0%,
+      rgba(0, 0, 0, 0.85) 28%,
+      rgba(0, 0, 0, 0.45) 52%,
+      transparent 72%
+    );
+  }
+
+  /* Remove the horizontal right-fade — not needed on mobile */
+  .overlayRight {
+    background: transparent;
+  }
+
+  .content {
+    max-width: 100%;
+    padding: 4.5rem 1.6rem 2rem;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.35rem;
+  }
+
+  .tagline {
+    font-size: 0.6rem;
+  }
+
+  .firstName,
+  .lastName {
+    font-size: clamp(2.8rem, 14vw, 4.5rem);
+  }
+
+  .role {
+    font-size: 0.78rem;
+    max-width: 85%;
+    margin-top: 0.6rem;
+  }
+
+  /* Move controls to the left so they don't cover the character */
+  .controls {
+    bottom: 1.8rem;
+    right: auto;
+    left: 1.6rem;
+  }
+
+  .soundHint {
+    display: none;
+  }
+
+  .scrollIndicator {
+    bottom: 1.6rem;
+  }
+}
+
+@media (max-width: 430px) {
+  .firstName,
+  .lastName {
+    font-size: clamp(2.5rem, 13.5vw, 3.8rem);
+  }
+
+  .role {
+    font-size: 0.73rem;
+  }
+}
