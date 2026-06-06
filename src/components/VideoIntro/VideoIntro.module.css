@@ -302,14 +302,20 @@
  * through in the lower half.
  */
 @media (max-width: 768px) {
-  /* Full-width portrait video anchored to the bottom — fills viewport height */
+  /*
+   * Portrait phone viewport is also portrait — object-fit: cover works here.
+   * object-position: top center keeps the character's face visible at the top
+   * instead of anchoring from the bottom and cutting off the head.
+   */
   .fgVideo {
-    top: auto;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
   }
 
   /* Override the horizontal left-fade with a vertical top-down dark overlay */

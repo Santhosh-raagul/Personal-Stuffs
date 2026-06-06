@@ -8,15 +8,37 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 3rem;
-  transition: background 0.4s ease, padding 0.3s ease, backdrop-filter 0.4s ease;
+  transition: padding 0.3s ease;
 }
 
-.scrolled {
+/*
+ * backdrop-filter on the nav element itself makes it a containing block for
+ * position:fixed children (CSS spec), causing the drawer's inset:0 to be
+ * relative to the navbar height instead of the viewport. Use ::before so
+ * the frosted-glass effect doesn't break the drawer layout.
+ */
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.scrolled::before {
   background: rgba(8, 8, 8, 0.82);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.scrolled {
   padding: 1rem 3rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo {
@@ -104,22 +126,24 @@
 .drawer {
   position: fixed;
   inset: 0;
-  background: rgba(8, 8, 8, 0.96);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(6, 6, 6, 0.97);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.5rem;
+  gap: 2.8rem;
   opacity: 0;
+  transform: translateY(-6px);
   pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: 99;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  /* z-index must exceed the nav (100) — and must NOT use backdrop-filter
+     here either, to avoid creating another fixed containing block */
+  z-index: 200;
 }
 
 .drawerOpen {
   opacity: 1;
+  transform: translateY(0);
   pointer-events: all;
 }
 
