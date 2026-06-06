@@ -35,41 +35,51 @@ export default function Navbar() {
   };
 
   return (
-    <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-      <a href="#hero" className={styles.logo} onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}>
-        SR
-      </a>
-
-      {/* Desktop links */}
-      <ul className={styles.links}>
-        {NAV_LINKS.map((l) => (
-          <li key={l.href}>
-            <button className={styles.link} onClick={() => scrollTo(l.href)}>
-              {l.label}
-            </button>
-          </li>
-        ))}
-      </ul>
-
-      {/* Mobile hamburger */}
-      <button
-        className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
-        onClick={() => setMenuOpen((v) => !v)}
-        aria-label="Toggle menu"
-      >
-        <span />
-        <span />
-        <span />
-      </button>
-
-      {/* Mobile drawer */}
-      <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
+    <>
+      {/*
+       * Drawer is a SIBLING of nav, not a child.
+       * A child of nav would be trapped inside nav's stacking context,
+       * making its z-index ineffective against page-level elements.
+       * As a sibling, z-index: 200 is relative to the root stacking context.
+       */}
+      <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}
+           aria-hidden={!menuOpen}>
         {NAV_LINKS.map((l) => (
           <button key={l.href} className={styles.drawerLink} onClick={() => scrollTo(l.href)}>
             {l.label}
           </button>
         ))}
       </div>
-    </nav>
+
+      {/* Nav sits above the drawer (z-index: 201) when menu is open so the X is clickable */}
+      <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${menuOpen ? styles.navMenuOpen : ''}`}>
+        <a href="#hero" className={styles.logo} onClick={(e) => { e.preventDefault(); scrollTo('#hero'); }}>
+          SR
+        </a>
+
+        {/* Desktop links */}
+        <ul className={styles.links}>
+          {NAV_LINKS.map((l) => (
+            <li key={l.href}>
+              <button className={styles.link} onClick={() => scrollTo(l.href)}>
+                {l.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        {/* Mobile hamburger / X */}
+        <button
+          className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </nav>
+    </>
   );
 }

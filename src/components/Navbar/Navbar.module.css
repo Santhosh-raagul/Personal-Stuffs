@@ -41,6 +41,11 @@
   padding: 1rem 3rem;
 }
 
+/* Raise nav above the drawer so the hamburger/X button stays clickable */
+.navMenuOpen {
+  z-index: 201;
+}
+
 .logo {
   font-family: var(--font-mono, monospace);
   font-size: 1.1rem;
