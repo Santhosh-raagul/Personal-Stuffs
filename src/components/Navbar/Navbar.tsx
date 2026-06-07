@@ -49,6 +49,9 @@ export default function Navbar() {
             {l.label}
           </button>
         ))}
+        <a href="/resume.pdf" download className={styles.drawerLink} style={{ color: 'rgba(255, 140, 40, 0.85)' }}>
+          Resume ↓
+        </a>
       </div>
 
       {/* Nav sits above the drawer (z-index: 201) when menu is open so the X is clickable */}
@@ -67,6 +70,10 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+
+        <a href="/resume.pdf" download className={styles.resumeBtn}>
+          Resume
+        </a>
 
         {/* Mobile hamburger / X */}
         <button

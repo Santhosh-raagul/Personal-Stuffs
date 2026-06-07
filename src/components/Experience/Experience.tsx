@@ -11,17 +11,29 @@ const EXPERIENCES = [
   {
     role: 'Associate Software Developer',
     company: 'FinSurge Pvt Ltd',
+    period: 'Apr 2026 – Present',
+    type: 'Featured Project',
+    project: 'Early Warning System',
+    highlights: [
+      'Built and delivered a 100% agentic Early Warning System using Claude Code — pulls real customer data from external APIs, analyses behavioural patterns, and auto-generates risk alerts for suspicious activity.',
+      'Architected the full stack end-to-end: Java/Spring Boot backend for data ingestion and rule-based alerting, Angular frontend for risk dashboards and alert management.',
+      'System is demo-ready for client and operates autonomously with zero manual intervention for routine risk monitoring.',
+    ],
+    tags: ['Claude Code', 'Java', 'Spring Boot', 'Angular', 'REST APIs', 'AI Agents'],
+  },
+  {
+    role: 'Associate Software Developer',
+    company: 'FinSurge Pvt Ltd',
     period: 'Aug 2025 – Present',
     type: 'Full-time',
-    project: 'TBank – LOS · Early Warning System · CIB Integration',
+    project: 'TBank – LOS · CIB Integration',
     highlights: [
       "Achieved a 93% reduction in execution time (20s to 1.3s) for the CIB module by re-architecting synchronous flows into asynchronous parallel pipelines using Java's CompletableFuture.",
       'Engineered a dynamic payload engine to transform complex XML/JSON datasets, solving impedance-mismatch by mapping 1000+ fields to a normalised database schema.',
-      'Built and delivered a 100% agentic Early Warning System using Claude Code — pulls real customer data from external APIs, analyses behavioural patterns, and auto-generates risk alerts for suspicious activity. Handled both Java/Spring Boot backend and Angular frontend end-to-end. Demo-ready for client (Apr 2026 – Present).',
       'Built a secure LOS-to-DMS data synchronisation pipeline via RESTful APIs with JWT-based role-based access control.',
       'Optimised MySQL queries via JPA/JPQL and collaborated with QA to test and debug critical loan-processing modules.',
     ],
-    tags: ['Java', 'Spring Boot', 'Angular', 'CompletableFuture', 'React.js', 'MySQL', 'JWT', 'REST APIs', 'Claude Code'],
+    tags: ['Java', 'Spring Boot', 'Angular', 'CompletableFuture', 'React.js', 'MySQL', 'JWT', 'REST APIs'],
   },
   {
     role: 'Software Developer – Intern',

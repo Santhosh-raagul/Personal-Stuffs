@@ -95,6 +95,25 @@
   width: 100%;
 }
 
+.resumeBtn {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 140, 40, 0.85);
+  border: 1px solid rgba(255, 140, 40, 0.35);
+  border-radius: 4px;
+  padding: 0.35rem 0.85rem;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.resumeBtn:hover {
+  color: #fff;
+  border-color: rgba(255, 140, 40, 0.7);
+  background: rgba(255, 140, 40, 0.08);
+}
+
 /* ── Hamburger ── */
 .hamburger {
   display: none;

@@ -67,7 +67,7 @@ export default function Projects() {
 
         <div className={styles.grid}>
           {PROJECTS.map((p, i) => (
-            <div key={i} className={`${styles.card} ${i === 0 ? styles.featured : ''} ${i === 2 ? styles.agentic : ''}`}>
+            <div key={i} className={`${styles.card} ${i === 0 ? styles.featured : ''} ${i === 1 ? styles.featured : ''} ${i === 2 ? styles.agentic : ''}`}>
               <div className={styles.cardTop}>
                 <span className={styles.number}>{p.number}</span>
                 <div className={styles.cardMeta}>
